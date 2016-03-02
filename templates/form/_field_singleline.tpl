@@ -4,6 +4,6 @@
         <input type="text" id="{{ #id }}{{ lang_code_for_id }}" name="{{ name }}{{ lang_code_with_dollar }}" 
             value="{{ r[name|as_atom]|default:defaultvalue }}"
             {% if not is_editable %}disabled="disabled"{% endif %}
-            {% include "_language_attrs.tpl" language=lang_code class="do_autofocus form-control field-"|append:name %} />
+            {% include "_language_attrs.tpl" language=lang_code class="form-control field-"|append:name %} />
     </div>
 </div>
