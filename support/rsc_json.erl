@@ -109,6 +109,9 @@ map_rsc_json_field(Id, {subject_edges, Pred, Name}, ImgOpts, Context) ->
                     || M <- m_edge:subjects(Id, Pred, Context)]
            }};
 
+map_rsc_json_field(Id, {callback, K, F}, _ImgOpts, Context) ->
+    {K, F(Id, _ImgOpts, Context)}; 
+
 map_rsc_json_field(Id, K, _F, Context) ->
     case trans(m_rsc:p(Id, K, Context), Context) of
         null -> undefined;
