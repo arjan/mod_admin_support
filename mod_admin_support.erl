@@ -1,4 +1,4 @@
--%% @author Arjan Scherpenisse <arjan@miraclethings.nl>
+%% @author Arjan Scherpenisse <arjan@miraclethings.nl>
 %% @copyright 2016 Arjan Scherpenisse
 %% @doc Support routines for quickly building admin interfaces and JSON APIs
 
