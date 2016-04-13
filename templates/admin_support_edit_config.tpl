@@ -15,7 +15,7 @@
                     <div class="form-group row">
                         <label class="control-label col-md-3" for="{{ #title }}{{ lang_code_for_id }}">{{ label }}</label>
                         <div class="col-md-9">
-                            <textarea class="form-control" rows=6 id=#foo.key name="{{ key }}">{{ m.config[module][key].value|default:"Foo" }}</textarea>
+                            <textarea class="form-control" rows=6 id=#foo.key name="{{ key }}">{{ m.config[module][key].value }}</textarea>
                             {% validate id=#foo.key presence %}
                         </div>
                     </div>
