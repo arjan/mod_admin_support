@@ -23,8 +23,16 @@
 
 -include_lib("zotonic.hrl").
 
+-export([event/2]).
 
 %%====================================================================
 %% support functions go here
 %%====================================================================
 
+event(#submit{message={edit_config_save, [{module, Module}, {fields, Fields}]}}, Context) ->
+    [ok = save_field(Module, Field, Context) || {Field, _Label} <- Fields],
+    z_render:growl("Saved", Context).
+
+save_field(Module, Field, Context) ->
+    Value = z_context:get_q(z_convert:to_list(Field), Context),
+    m_config:set_value(Module, Field, Value, Context).
