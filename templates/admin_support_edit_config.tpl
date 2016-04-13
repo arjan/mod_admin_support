@@ -22,12 +22,12 @@
 
             {% endfor %}
 
-            <button class="btn btn-primary">{_ Save _}</button>
+            <div class="col-md-9 col-md-offset-3">
+                <button class="btn btn-primary">{_ Save _}</button>
+            </div>
             
         </form>
 
     </div>
-    
-    {% debug %}
     
 {% endblock %}
