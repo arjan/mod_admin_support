@@ -96,6 +96,12 @@ map_rsc_json_field(Id, {edge, Pred, Fields}, ImgOpts, Context) ->
         [P|_] ->
             {Pred, rsc(P, Fields, ImgOpts, Context)}
     end;
+map_rsc_json_field(Id, {subject_edge, Pred, Fields}, ImgOpts, Context) ->
+    case m_edge:subjects(Id, Pred, Context) of
+        [] -> {Pred, null};
+        [P|_] ->
+            {Pred, rsc(P, Fields, ImgOpts, Context)}
+    end;
 
 map_rsc_json_field(Id, {edges, Pred, Fields}, _ImgOpts, Context) ->
     {Pred, {array, [rsc(I, Fields, _ImgOpts, Context) || I <- m_edge:objects(Id, Pred, Context)]}};
@@ -103,6 +109,13 @@ map_rsc_json_field(Id, {edges, Pred, Fields}, _ImgOpts, Context) ->
 map_rsc_json_field(Id, {edges, Pred}, _ImgOpts, Context) ->
     {Pred, {array, m_edge:objects(Id, Pred, Context)}};
 
+map_rsc_json_field(Id, {subject_edges, Pred, Fields}, _ImgOpts, Context) when is_list(Fields) ->
+    {Pred, {array, [rsc(I, Fields, _ImgOpts, Context) || I <- m_edge:subjects(Id, Pred, Context)]}};
+
+map_rsc_json_field(Id, {subject_edges, Pred}, _ImgOpts, Context) ->
+    {Pred, {array, m_edge:subjects(Id, Pred, Context)}};
+
+%% legacy
 map_rsc_json_field(Id, {subject_edges, Pred, Name}, ImgOpts, Context) ->
     {Name, {array, [
                     rsc(M, [title, subtitle, image], ImgOpts, Context)
