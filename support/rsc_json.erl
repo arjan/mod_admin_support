@@ -39,10 +39,13 @@ rsc(Id, Fields, ImgOpts, Context) ->
       |
       lists:filter(fun(undefined) -> false; (_) -> true end, [map_rsc_json_field(Id, K, ImgOpts, Context)|| K <- Fields])
     ]}.
-      
+
 %% images
 map_rsc_json_field(Id, image, ImgOpts, Context) ->
     {image, image(Id, ImgOpts, Context)};
+
+map_rsc_json_field(Id, source_image, ImgOpts, Context) ->
+    {source_image, image(Id, [{lossless, true}], Context)};
 
 %% thumbnail
 map_rsc_json_field(Id, thumbnail, ImgOpts, Context) ->
@@ -123,7 +126,7 @@ map_rsc_json_field(Id, {subject_edges, Pred, Name}, ImgOpts, Context) ->
            }};
 
 map_rsc_json_field(Id, {callback, K, F}, _ImgOpts, Context) ->
-    {K, F(Id, _ImgOpts, Context)}; 
+    {K, F(Id, _ImgOpts, Context)};
 
 map_rsc_json_field(Id, K, _F, Context) ->
     case trans(m_rsc:p(Id, K, Context), Context) of
