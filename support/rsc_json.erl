@@ -1,7 +1,7 @@
+
 -module(rsc_json).
 
 -export([image/3, trans/2, rsc/3, rsc/4]).
-
 
 trans(undefined, _) ->
     null;
@@ -38,7 +38,7 @@ rsc(Id, Fields, ImgOpts, Context) ->
       {category, proplists:get_value(name, m_rsc:p(Id, category, Context))}
       |
       lists:filter(fun(undefined) -> false; (_) -> true end, [map_rsc_json_field(Id, K, ImgOpts, Context)|| K <- Fields])
-    ]}.
+     ]}.
 
 %% images
 map_rsc_json_field(Id, image, ImgOpts, Context) ->
