@@ -1,4 +1,3 @@
-
 -module(rsc_json).
 
 -export([image/3, trans/2, rsc/3, rsc/4]).
