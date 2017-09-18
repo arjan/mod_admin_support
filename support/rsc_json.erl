@@ -129,6 +129,6 @@ map_rsc_json_field(Id, {callback, K, F}, _ImgOpts, Context) ->
 
 map_rsc_json_field(Id, K, _F, Context) ->
     case trans(m_rsc:p(Id, K, Context), Context) of
-        null -> undefined;
+        null -> {K, undefined};
         V -> {K, V}
     end.
